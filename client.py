@@ -30,5 +30,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as my_socket:
     my_socket.send(bytes(LINE, 'utf-8') + b'\r\n')
     data = my_socket.recv(1024)
     print(data.decode('utf-8'))
-    my_socket.send(bytes("ACK sip:" + USER + " SIP/2.0","utf-8") + b'\r\n')
+    if METHOD == "INVITE":
+        my_socket.send(bytes("ACK sip:" + USER + " SIP/2.0","utf-8") + b'\r\n')
+        data = my_socket.recv(1024)
     print("Fin.")
